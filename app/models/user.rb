@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
-  validates :email, presence: true, uniqueness: true
+  belongs_to :role
+  belongs_to :company
   has_secure_password
+  
+  validates :email, presence: true, uniqueness: true
 end
