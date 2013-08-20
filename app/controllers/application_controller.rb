@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  
   before_action :set_i18n_locale_from_params
-  before_action :authorize
+  before_action :authorize, :check_workplace
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -26,6 +28,37 @@ class ApplicationController < ActionController::Base
     def authorize
       if not User.find_by(id: session[:user_id])
         redirect_to login_url, notice: "Please log in"
+      end
+    end
+    
+    def check_workplace
+      if current_user
+        if (current_user.client? and client_workplace) or
+           (current_user.admin? and admin_workplace)
+        else
+          redirect_to home_url
+        end
+      end
+    end
+    
+    def client_workplace
+      request_to controller: ['sessions', 'home'] or
+      request_to controller: ['users', 'orders'], action: ['new', 'create']
+    end
+    
+    def admin_workplace
+      true # all places
+    end
+    
+    def request_to args={}
+      if args[:controller].include? params[:controller]
+        if args[:action]
+          args[:action].include? params[:action]
+        else
+          true
+        end
+      else
+        false
       end
     end
 end

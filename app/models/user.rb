@@ -4,4 +4,12 @@ class User < ActiveRecord::Base
   has_secure_password
   
   validates :email, presence: true, uniqueness: true
+  
+  def admin?
+    role.title == 'admin'
+  end
+
+  def client?
+    role.title == 'client'
+  end
 end
