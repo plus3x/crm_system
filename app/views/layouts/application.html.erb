@@ -10,6 +10,14 @@
   <div id="banner">
     <% image_tag("logo.png") %>
     <%= @page_title || t('.title') %>
+    <div id="login">
+      <% if session[:user_id] %>
+        <%= "Hello #{User.find(session[:user_id]).email}" %>
+        <%= link_to t('logout'), logout_url, method: :delete %>
+      <% else %>
+        <%= render template: "sessions/new" %>
+      <% end %>
+    </div>
   </div>
   <div id="columns">
     <div id="side"> 
