@@ -20,6 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  email: Электропочта
+  password: Пароль
   layouts:
     application:
       title: Система автоматизации работы фирмы
+      сopyright: 2013 Петров Владислав
+      home_page: Главная
+  sessions:
+    new:
+      create_new_user: Создать нового пользователя
+  activerecord:  
+    models:
+      user: Пользователь
+      users: Пользователи
+      company: Компания
+    attributes:
+      company:
+        name: Наименование организации
