@@ -1,14 +1,15 @@
 CrmSystem::Application.routes.draw do
+  scope '(:locale)' do
+    resources :users
   
-  resources :users
+    root 'home#index', as: 'home'
+    get 'admin' => 'admin#index'
   
-  root 'home#index', as: 'home'
-  get 'admin' => 'admin#index'
-  
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
+    controller :sessions do
+      get 'login' => :new
+      post 'login' => :create
+      delete 'logout' => :destroy
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
