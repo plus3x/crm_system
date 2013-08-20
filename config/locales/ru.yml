@@ -22,6 +22,9 @@
 ru:
   email: Электропочта
   password: Пароль
+  translation_not_available: такой перевод недоступен
+  login: Войти
+  logout: Выйти
   layouts:
     application:
       title: Система автоматизации работы фирмы
@@ -30,6 +33,13 @@ ru:
   sessions:
     new:
       create_new_user: Создать нового пользователя
+      please_log_in: Пожалуйста авторизируйтесь
+  home:
+    index:
+      home_title_html: '
+        <h1>Добро пожаловать!</h1>
+        <p>Вы можете оставить заявку на создание своей собственной сестемы автоматизации работы компании.</p>
+      '
   activerecord:  
     models:
       user: Пользователь
