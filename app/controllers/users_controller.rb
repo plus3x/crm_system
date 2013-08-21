@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: [:new, :create]
+  before_action :admin_pemissions, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.role_id = 2 # client
+    @user.role = Role.find_by_title 'client'
 
     respond_to do |format|
       if @user.save
@@ -72,5 +73,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+    
+    def admin_pemissions
+      redirect_to home_url if not current_user.admin?
     end
 end
