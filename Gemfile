@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Caledar
+gem 'event-calendar', :require => 'event_calendar'
+
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
